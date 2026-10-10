@@ -27,7 +27,7 @@
   --accent-bronze: #a67c52;
 
   --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-fraunces);
+  --font-display: "Fraunces Variable", Georgia, serif;
   --font-mono: var(--font-geist-mono);
 }
 
@@ -35,7 +35,7 @@
   --color-bg: var(--bg);
   --color-fg: var(--fg);
   --font-sans: var(--font-geist-sans);
-  --font-display: var(--font-fraunces);
+  --font-display: "Fraunces Variable", Georgia, serif;
   --font-mono: var(--font-geist-mono);
 }
 
