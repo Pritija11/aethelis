@@ -1,26 +1,176 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+  --bg: #0c0b09;
+  --bg-alt: #131210;
+  --surface: #18160f;
+  --surface-tint: #201d16;
+  --border: #2c2821;
+  --border-strong: #433d31;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --fg: #f3efe6;
+  --fg-muted: #a79d8a;
+  --fg-faint: #746a58;
+
+  --primary: #c3a05c;
+  --primary-dark: #a3803e;
+  --primary-soft: #2e2416;
+  --on-primary: #0c0b09;
+
+  --success: #7a9b7e;
+  --danger: #b5564a;
+  --warning: #bb8a3f;
+
+  --accent-sage: #7a9b7e;
+  --accent-wine: #8a4a4a;
+  --accent-steel: #6b7a8a;
+  --accent-bronze: #a67c52;
+
   --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-fraunces);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --font-sans: var(--font-geist-sans);
+  --font-display: var(--font-fraunces);
+  --font-mono: var(--font-geist-mono);
+}
+
+@layer base {
+  * {
+    border-color: var(--border);
   }
 }
 
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 96px;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+/* Scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Fine hairline grid, restrained — vault/ledger texture */
+.ledger-field {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image: linear-gradient(
+    color-mix(in srgb, var(--border-strong) 45%, transparent) 1px,
+    transparent 1px
+  );
+  background-size: 100% 56px;
+  mask-image: linear-gradient(to bottom, black 0%, transparent 85%);
+}
+
+/* Soft gold vignette glow behind hero content */
+.vault-glow {
+  position: absolute;
+  inset: -15% -10% auto -10%;
+  height: 640px;
+  background: radial-gradient(
+      38% 55% at 75% 25%,
+      color-mix(in srgb, var(--primary) 16%, transparent),
+      transparent 72%
+    ),
+    radial-gradient(
+      30% 45% at 15% 60%,
+      color-mix(in srgb, var(--accent-steel) 10%, transparent),
+      transparent 72%
+    );
+  pointer-events: none;
+}
+
+/* Thin gold rule, used as a section ornament */
+.gold-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--primary);
+}
+
+/* Status pills used inside portfolio mock UI */
+.pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  border-radius: 999px;
+  padding: 2px 9px;
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.pill-success {
+  background: color-mix(in srgb, var(--success) 16%, transparent);
+  color: var(--success);
+}
+.pill-warning {
+  background: color-mix(in srgb, var(--warning) 18%, transparent);
+  color: var(--warning);
+}
+.pill-danger {
+  background: color-mix(in srgb, var(--danger) 16%, transparent);
+  color: var(--danger);
+}
+.pill-neutral {
+  background: var(--surface-tint);
+  color: var(--fg-muted);
+}
+
+/* Category tag chips */
+.tag-gold {
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  color: var(--primary);
+  border-color: color-mix(in srgb, var(--primary) 30%, transparent);
+}
+.tag-sage {
+  background: color-mix(in srgb, var(--accent-sage) 14%, transparent);
+  color: var(--accent-sage);
+  border-color: color-mix(in srgb, var(--accent-sage) 30%, transparent);
+}
+.tag-steel {
+  background: color-mix(in srgb, var(--accent-steel) 14%, transparent);
+  color: var(--accent-steel);
+  border-color: color-mix(in srgb, var(--accent-steel) 30%, transparent);
+}
+.tag-wine {
+  background: color-mix(in srgb, var(--accent-wine) 16%, transparent);
+  color: var(--accent-wine);
+  border-color: color-mix(in srgb, var(--accent-wine) 32%, transparent);
 }
